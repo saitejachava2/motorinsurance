@@ -1,0 +1,9 @@
+{
+	"name": "athenamotor-insurance-adf",
+	"location": "southindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "de05786f-58c0-4a9b-baf7-29c8a50c6d8b",
+		"tenantId": "4c4ad5f9-1346-47c8-bc52-938e9c736bab"
+	}
+}

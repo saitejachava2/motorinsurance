@@ -1,0 +1,907 @@
+{
+	"$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"type": "string",
+			"metadata": "Data Factory name",
+			"defaultValue": "athenamotor-insurance-adf"
+		},
+		"ls_quotedata_ablob_connectionString": {
+			"type": "secureString",
+			"metadata": "Secure string for 'connectionString' of 'ls_quotedata_ablob'"
+		},
+		"ls_quotedata_adsl_accountKey": {
+			"type": "secureString",
+			"metadata": "Secure string for 'accountKey' of 'ls_quotedata_adsl'"
+		},
+		"ls_quotedata_adsl_properties_typeProperties_url": {
+			"type": "string",
+			"defaultValue": "https://athenainsurancedl.dfs.core.windows.net/"
+		}
+	},
+	"variables": {
+		"factoryId": "[concat('Microsoft.DataFactory/factories/', parameters('factoryName'))]"
+	},
+	"resources": [
+		{
+			"name": "[concat(parameters('factoryName'), '/ls_quotedata_ablob')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "This is linked service for Quote data from blob storage to ADF",
+				"annotations": [],
+				"type": "AzureBlobStorage",
+				"typeProperties": {
+					"connectionString": "[parameters('ls_quotedata_ablob_connectionString')]"
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ls_quotedata_adsl')]",
+			"type": "Microsoft.DataFactory/factories/linkedServices",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "This is linked service of quote data from ADF to adsl2",
+				"annotations": [],
+				"type": "AzureBlobFS",
+				"typeProperties": {
+					"url": "[parameters('ls_quotedata_adsl_properties_typeProperties_url')]",
+					"accountKey": {
+						"type": "SecureString",
+						"value": "[parameters('ls_quotedata_adsl_accountKey')]"
+					}
+				}
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_quotedata_ablob')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_quotedata_ablob",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobStorageLocation",
+						"fileName": "Quote_Data.csv",
+						"container": "quotedata"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_quotedata_ablob')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/pl_ingest_quotedata')]",
+			"type": "Microsoft.DataFactory/factories/pipelines",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"description": "This is pipeline for quote data ingestion.",
+				"activities": [
+					{
+						"name": "Copy quote data",
+						"type": "Copy",
+						"dependsOn": [],
+						"policy": {
+							"timeout": "0.00:11:00",
+							"retry": 1,
+							"retryIntervalInSeconds": 30,
+							"secureOutput": false,
+							"secureInput": false
+						},
+						"userProperties": [],
+						"typeProperties": {
+							"source": {
+								"type": "DelimitedTextSource",
+								"storeSettings": {
+									"type": "AzureBlobStorageReadSettings",
+									"maxConcurrentConnections": 1,
+									"recursive": true,
+									"enablePartitionDiscovery": false
+								},
+								"formatSettings": {
+									"type": "DelimitedTextReadSettings"
+								}
+							},
+							"sink": {
+								"type": "DelimitedTextSink",
+								"storeSettings": {
+									"type": "AzureBlobFSWriteSettings",
+									"maxConcurrentConnections": 1
+								},
+								"formatSettings": {
+									"type": "DelimitedTextWriteSettings",
+									"quoteAllText": true,
+									"fileExtension": ".txt"
+								}
+							},
+							"enableStaging": false,
+							"translator": {
+								"type": "TabularTranslator",
+								"mappings": [
+									{
+										"source": {
+											"name": "Customer_ID",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Customer_ID",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Purchase_Date",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Purchase_Date",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Cover_Start_Date",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Cover_Start_Date",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Cover_End_Date",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Cover_End_Date",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Period_of_Cover",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Period_of_Cover",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "LOB",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "LOB",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Broker",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Broker",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Age",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Age",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Occupation",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Occupation",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Income",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Income",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Marital_Status",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Marital_Status",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Premium",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Premium",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Vehicle_Type",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Vehicle_Type",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Vehicle_Brand",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Vehicle_Brand",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Vehicle_Age",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Vehicle_Age",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Vehicle_Value",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Vehicle_Value",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Vehicle_Use",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Vehicle_Use",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Vehicle_Mileage",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Vehicle_Mileage",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "NCD",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "NCD",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Number_of_Drivers",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Number_of_Drivers",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Driver1_Age",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Driver1_Age",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Driver2_Age",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Driver2_Age",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Driver1_LicenceYears",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Driver1_LicenceYears",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Driver2_LicenceYears",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Driver2_LicenceYears",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Driver1_LicenceRecord",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Driver1_LicenceRecord",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Driver2_LicenceRecord",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Driver2_LicenceRecord",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Driver1_Claims_Count",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Driver1_Claims_Count",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Driver2_Claims_Count",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Driver2_Claims_Count",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Location_Risk",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Location_Risk",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Daytime_Parking",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Daytime_Parking",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Overnight_Parking",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Overnight_Parking",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Telematics",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Telematics",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Credit_Score",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Credit_Score",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Fraud_Risk_Score",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Fraud_Risk_Score",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "CCJs",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "CCJs",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Sale_Flag",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Sale_Flag",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Claims_Count",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Claims_Count",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Vehicle_Engine",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Vehicle_Engine",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Vehicle_HP",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Vehicle_HP",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Saftey_ABS",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Saftey_ABS",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Saftey_ESC",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Saftey_ESC",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Saftey_TCS",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Saftey_TCS",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Saftey_Rear_Camera",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Saftey_Rear_Camera",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Antitheft_Immobilizer",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Antitheft_Immobilizer",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Antitheft_Alarm",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Antitheft_Alarm",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Antitheft_Remote_Locking",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Antitheft_Remote_Locking",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Antitheft_Steering_Wheel_Locks",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Antitheft_Steering_Wheel_Locks",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Antitheft_GPS_Tracking",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Antitheft_GPS_Tracking",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Fuel_Type",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Fuel_Type",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Transmission",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Transmission",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Coverage_Type",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Coverage_Type",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Area_Type",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Area_Type",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Insurance_Type",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Insurance_Type",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Payment_Type",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Payment_Type",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Traffic_Violations",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Traffic_Violations",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "DUI",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "DUI",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Education",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Education",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Licence",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Licence",
+											"type": "String",
+											"physicalType": "String"
+										}
+									},
+									{
+										"source": {
+											"name": "Channel",
+											"type": "String",
+											"physicalType": "String"
+										},
+										"sink": {
+											"name": "Channel",
+											"type": "String",
+											"physicalType": "String"
+										}
+									}
+								],
+								"typeConversion": true,
+								"typeConversionSettings": {
+									"allowDataTruncation": true,
+									"treatBooleanAsNumber": false
+								}
+							}
+						},
+						"inputs": [
+							{
+								"referenceName": "ds_quotedata_ablob",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						],
+						"outputs": [
+							{
+								"referenceName": "ds_quotedata_adsl",
+								"type": "DatasetReference",
+								"parameters": {}
+							}
+						]
+					}
+				],
+				"policy": {
+					"elapsedTimeMetric": {}
+				},
+				"annotations": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/datasets/ds_quotedata_ablob')]",
+				"[concat(variables('factoryId'), '/datasets/ds_quotedata_adsl')]"
+			]
+		},
+		{
+			"name": "[concat(parameters('factoryName'), '/ds_quotedata_adsl')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "ls_quotedata_adsl",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "DelimitedText",
+				"typeProperties": {
+					"location": {
+						"type": "AzureBlobFSLocation",
+						"fileName": "quotedata1.csv",
+						"folderPath": "insurance",
+						"fileSystem": "raw"
+					},
+					"columnDelimiter": ",",
+					"escapeChar": "\\",
+					"firstRowAsHeader": true,
+					"quoteChar": "\""
+				},
+				"schema": []
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/ls_quotedata_adsl')]"
+			]
+		}
+	]
+}

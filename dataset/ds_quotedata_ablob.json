@@ -1,18 +1,17 @@
 {
-	"name": "ds_quotedata_adsl",
+	"name": "ds_quotedata_ablob",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "ls_quotedata_adsl",
+			"referenceName": "ls_quotedata_ablob",
 			"type": "LinkedServiceReference"
 		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "AzureBlobFSLocation",
-				"fileName": "quotedata1.csv",
-				"folderPath": "insurance",
-				"fileSystem": "raw"
+				"type": "AzureBlobStorageLocation",
+				"fileName": "Quote_Data.csv",
+				"container": "quotedata"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",

@@ -1,0 +1,23 @@
+{
+	"name": "ds_quotedata_adsl",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_quotedata_adsl",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "quotedata",
+				"fileSystem": "raw"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}

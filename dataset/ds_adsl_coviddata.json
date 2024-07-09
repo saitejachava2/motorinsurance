@@ -1,0 +1,32 @@
+{
+	"name": "ds_adsl_coviddata",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_quotedata_adsl",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"sinkFile": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": {
+					"value": "@dataset().sinkFile",
+					"type": "Expression"
+				},
+				"folderPath": "population",
+				"fileSystem": "raw"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}

@@ -1,0 +1,30 @@
+{
+	"name": "ds_http_coviddata",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_http_coviddata",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"sourceData": {
+				"type": "string"
+			}
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "HttpServerLocation",
+				"relativeUrl": {
+					"value": "@dataset().sourceData",
+					"type": "Expression"
+				}
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}

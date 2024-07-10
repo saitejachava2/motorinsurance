@@ -1,5 +1,5 @@
 {
-	"name": "ds_quotedata_adsl",
+	"name": "ds_motordata_adsl",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "ls_quotedata_adsl",

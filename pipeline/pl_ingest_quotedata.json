@@ -718,7 +718,7 @@
 							},
 							"outputs": [
 								{
-									"referenceName": "ds_quotedata_adsl",
+									"referenceName": "ds_motordata_adsl",
 									"type": "DatasetReference"
 								}
 							]

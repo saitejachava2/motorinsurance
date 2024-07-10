@@ -1,0 +1,25 @@
+{
+	"name": "tr_motor_data",
+	"properties": {
+		"annotations": [],
+		"runtimeState": "Started",
+		"pipelines": [
+			{
+				"pipelineReference": {
+					"referenceName": "pl_ingest_motordata",
+					"type": "PipelineReference"
+				}
+			}
+		],
+		"type": "ScheduleTrigger",
+		"typeProperties": {
+			"recurrence": {
+				"frequency": "Day",
+				"interval": 1,
+				"startTime": "2024-07-10T13:48:00",
+				"endTime": "2024-07-11T08:15:00",
+				"timeZone": "India Standard Time"
+			}
+		}
+	}
+}

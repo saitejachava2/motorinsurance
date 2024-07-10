@@ -1,10 +1,15 @@
 {
 	"name": "ls_http_coviddata",
 	"properties": {
+		"parameters": {
+			"basesourcefile": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "HttpServer",
 		"typeProperties": {
-			"url": "https://ecdc.blob.core.windows.net",
+			"url": "@{linkedService().basesourcefile}",
 			"enableServerCertificateValidation": true,
 			"authenticationType": "Anonymous"
 		}

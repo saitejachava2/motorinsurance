@@ -5,12 +5,20 @@
 			"referenceName": "ls_quotedata_adsl",
 			"type": "LinkedServiceReference"
 		},
+		"parameters": {
+			"sinkFile": {
+				"type": "string"
+			}
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "quotedata1.csv",
+				"fileName": {
+					"value": "@dataset().sinkFile",
+					"type": "Expression"
+				},
 				"folderPath": "insurance",
 				"fileSystem": "raw"
 			},

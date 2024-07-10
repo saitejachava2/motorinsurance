@@ -1,0 +1,19 @@
+{
+	"name": "ds_motor_insurance_json",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_quotedata_ablob",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "motordata insurance.json",
+				"container": "configs"
+			}
+		},
+		"schema": {}
+	}
+}

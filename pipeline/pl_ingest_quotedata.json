@@ -9,10 +9,6 @@
 				"dependsOn": [],
 				"userProperties": [],
 				"typeProperties": {
-					"dataset": {
-						"referenceName": "ds_quotedata_ablob",
-						"type": "DatasetReference"
-					},
 					"timeout": "0.00:02:00",
 					"sleep": 10
 				}
@@ -37,20 +33,10 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"dataset": {
-						"referenceName": "ds_quotedata_ablob",
-						"type": "DatasetReference"
-					},
-					"fieldList": [
-						"columnCount",
-						"size",
-						"exists",
-						"itemName",
-						"itemType",
-						"lastModified"
-					],
+					"fieldList": [],
 					"storeSettings": {
 						"type": "AzureBlobStorageReadSettings",
+						"recursive": true,
 						"enablePartitionDiscovery": false
 					},
 					"formatSettings": {
@@ -140,725 +126,596 @@
 										{
 											"source": {
 												"name": "Customer_ID",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Customer_ID",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Purchase_Date",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Purchase_Date",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Cover_Start_Date",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Cover_Start_Date",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Cover_End_Date",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Cover_End_Date",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Period_of_Cover",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Period_of_Cover",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "LOB",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "LOB",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Broker",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Broker",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Age",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Age",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Occupation",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Occupation",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Income",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Income",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Marital_Status",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Marital_Status",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Premium",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Premium",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Vehicle_Type",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Vehicle_Type",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Vehicle_Brand",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Vehicle_Brand",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Vehicle_Age",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Vehicle_Age",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Vehicle_Value",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Vehicle_Value",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Vehicle_Use",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Vehicle_Use",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Vehicle_Mileage",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Vehicle_Mileage",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "NCD",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "NCD",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Number_of_Drivers",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Number_of_Drivers",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Driver1_Age",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Driver1_Age",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Driver2_Age",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Driver2_Age",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Driver1_LicenceYears",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Driver1_LicenceYears",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Driver2_LicenceYears",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Driver2_LicenceYears",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Driver1_LicenceRecord",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Driver1_LicenceRecord",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Driver2_LicenceRecord",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Driver2_LicenceRecord",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Driver1_Claims_Count",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Driver1_Claims_Count",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Driver2_Claims_Count",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Driver2_Claims_Count",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Location_Risk",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Location_Risk",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Daytime_Parking",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Daytime_Parking",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Overnight_Parking",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Overnight_Parking",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Telematics",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Telematics",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Credit_Score",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Credit_Score",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Fraud_Risk_Score",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Fraud_Risk_Score",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "CCJs",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "CCJs",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Sale_Flag",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Sale_Flag",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Claims_Count",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Claims_Count",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Vehicle_Engine",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Vehicle_Engine",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Vehicle_HP",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Vehicle_HP",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Saftey_ABS",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Saftey_ABS",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Saftey_ESC",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Saftey_ESC",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Saftey_TCS",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Saftey_TCS",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Saftey_Rear_Camera",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Saftey_Rear_Camera",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Antitheft_Immobilizer",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Antitheft_Immobilizer",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Antitheft_Alarm",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Antitheft_Alarm",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Antitheft_Remote_Locking",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Antitheft_Remote_Locking",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Antitheft_Steering_Wheel_Locks",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Antitheft_Steering_Wheel_Locks",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Antitheft_GPS_Tracking",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Antitheft_GPS_Tracking",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Fuel_Type",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Fuel_Type",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Transmission",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Transmission",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Coverage_Type",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Coverage_Type",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Area_Type",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Area_Type",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Insurance_Type",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Insurance_Type",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Payment_Type",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Payment_Type",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Traffic_Violations",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Traffic_Violations",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "DUI",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "DUI",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Education",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Education",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Licence",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Licence",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										},
 										{
 											"source": {
 												"name": "Channel",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											},
 											"sink": {
 												"name": "Channel",
-												"type": "String",
-												"physicalType": "String"
+												"type": "String"
 											}
 										}
-									],
-									"typeConversion": true,
-									"typeConversionSettings": {
-										"allowDataTruncation": true,
-										"treatBooleanAsNumber": false
-									}
+									]
 								}
 							},
-							"inputs": [
-								{
-									"referenceName": "ds_quotedata_ablob",
-									"type": "DatasetReference"
-								}
-							],
 							"outputs": [
 								{
 									"referenceName": "ds_quotedata_adsl",

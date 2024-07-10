@@ -1,12 +1,15 @@
 {
-	"name": "ds_http_coviddata",
+	"name": "ds_motor_insurance",
 	"properties": {
 		"linkedServiceName": {
-			"referenceName": "ls_http_coviddata",
+			"referenceName": "ls_quotedata_ablob",
 			"type": "LinkedServiceReference"
 		},
 		"parameters": {
-			"sourceData": {
+			"blobfile": {
+				"type": "string"
+			},
+			"mainblob": {
 				"type": "string"
 			}
 		},
@@ -14,11 +17,12 @@
 		"type": "DelimitedText",
 		"typeProperties": {
 			"location": {
-				"type": "HttpServerLocation",
-				"relativeUrl": {
-					"value": "@dataset().sourceData",
+				"type": "AzureBlobStorageLocation",
+				"fileName": {
+					"value": "@dataset().blobfile",
 					"type": "Expression"
-				}
+				},
+				"container": "quotedata"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",

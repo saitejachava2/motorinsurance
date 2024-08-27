@@ -1,0 +1,9 @@
+{
+	"name": "adf-home-insurance-athena",
+	"location": "southindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "1468e266-d43a-4cf3-bc2b-f57138e47e91",
+		"tenantId": "7c7a9900-469a-42de-aa06-0e42c313e718"
+	}
+}

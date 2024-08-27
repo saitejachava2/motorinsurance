@@ -68,7 +68,7 @@
 				"userProperties": [],
 				"typeProperties": {
 					"expression": {
-						"value": "@activity('Get Metadata').output.columnCount,equals(16)",
+						"value": "@equals(activity('Get Metadata').output.columnCount,16)",
 						"type": "Expression"
 					},
 					"ifTrueActivities": [

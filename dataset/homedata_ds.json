@@ -1,0 +1,88 @@
+{
+	"name": "homedata_ds",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "homedata_ls",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Housing_Insurance.csv",
+				"fileSystem": "ushomedata"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "State",
+				"type": "String"
+			},
+			{
+				"name": "Building Age",
+				"type": "String"
+			},
+			{
+				"name": "Claim Frequency",
+				"type": "String"
+			},
+			{
+				"name": "Risk Score",
+				"type": "String"
+			},
+			{
+				"name": "Average Premium",
+				"type": "String"
+			},
+			{
+				"name": "Construction Type",
+				"type": "String"
+			},
+			{
+				"name": "Latitude",
+				"type": "String"
+			},
+			{
+				"name": "Longitude",
+				"type": "String"
+			},
+			{
+				"name": "Incident Type",
+				"type": "String"
+			},
+			{
+				"name": "Incident Begin Date",
+				"type": "String"
+			},
+			{
+				"name": "Incident End Date",
+				"type": "String"
+			},
+			{
+				"name": "Price",
+				"type": "String"
+			},
+			{
+				"name": "Beds",
+				"type": "String"
+			},
+			{
+				"name": "Baths",
+				"type": "String"
+			},
+			{
+				"name": "Area",
+				"type": "String"
+			},
+			{
+				"name": "Address",
+				"type": "String"
+			}
+		]
+	}
+}

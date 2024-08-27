@@ -1,0 +1,37 @@
+{
+	"name": "home_insurance_pl",
+	"properties": {
+		"activities": [
+			{
+				"name": "Get Metadata",
+				"type": "GetMetadata",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"typeProperties": {
+					"dataset": {
+						"referenceName": "homedata_ds",
+						"type": "DatasetReference"
+					},
+					"fieldList": [
+						"columnCount",
+						"exists"
+					],
+					"storeSettings": {
+						"type": "AzureBlobFSReadSettings",
+						"enablePartitionDiscovery": false
+					},
+					"formatSettings": {
+						"type": "DelimitedTextReadSettings"
+					}
+				}
+			}
+		],
+		"annotations": []
+	}
+}

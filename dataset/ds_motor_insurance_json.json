@@ -11,7 +11,7 @@
 			"location": {
 				"type": "AzureBlobStorageLocation",
 				"fileName": "motordata insurance.json",
-				"container": "configs"
+				"container": "all-data"
 			}
 		},
 		"schema": {}

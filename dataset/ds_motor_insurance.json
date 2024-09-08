@@ -22,7 +22,7 @@
 					"value": "@dataset().blobfile",
 					"type": "Expression"
 				},
-				"container": "quotedata"
+				"container": "configs"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",

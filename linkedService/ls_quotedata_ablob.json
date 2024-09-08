@@ -6,8 +6,8 @@
 		"annotations": [],
 		"type": "AzureBlobStorage",
 		"typeProperties": {
-			"connectionString": "DefaultEndpointsProtocol=https;AccountName=athenainsurance;EndpointSuffix=core.windows.net;",
-			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQEJBM0Y1QzY5LTQ0NDgtNDE0RS04RjM0LTE4OERENEFEMUMzN181ZmU3N2NmMy1jNjNiLTQxNjItYmUzYy1iOGJlMDkzYjg0MWEiDQp9"
+			"connectionString": "DefaultEndpointsProtocol=https;AccountName=athenamotorinsurance;EndpointSuffix=core.windows.net;",
+			"encryptedCredential": "ew0KICAiVmVyc2lvbiI6ICIyMDE3LTExLTMwIiwNCiAgIlByb3RlY3Rpb25Nb2RlIjogIktleSIsDQogICJTZWNyZXRDb250ZW50VHlwZSI6ICJQbGFpbnRleHQiLA0KICAiQ3JlZGVudGlhbElkIjogIkRBVEFGQUNUT1JZQDBBNkUxNUUzLUEyRUItNDNBNy04QjBELTVEMkIyQ0IzOUJDRV9mOGQzMThjMC0zNWE3LTQzNmUtYjI2OC03ZmY1NTk1Y2ZjNmEiDQp9"
 		}
 	}
 }

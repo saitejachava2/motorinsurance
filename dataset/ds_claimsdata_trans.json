@@ -11,7 +11,7 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": "transclaim.csv",
-				"fileSystem": "Motor"
+				"fileSystem": "motor"
 			},
 			"columnDelimiter": ",",
 			"escapeChar": "\\",

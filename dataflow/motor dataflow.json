@@ -64,11 +64,13 @@
 				"     output(Higestclaim as long)) ~> rankaccordingtoclaim",
 				"rankaccordingtoclaim sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     partitionFileNames:['transclaim.csv'],",
 				"     umask: 0022,",
 				"     preCommands: [],",
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sinkclaimsdata"
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> sinkclaimsdata"
 			]
 		}
 	}

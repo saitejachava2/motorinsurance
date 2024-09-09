@@ -1,0 +1,23 @@
+{
+	"name": "ds_claimsdata_trans",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_motordata_silver",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "transclaim.csv",
+				"fileSystem": "Motor"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}

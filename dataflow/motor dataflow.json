@@ -1,0 +1,75 @@
+{
+	"name": "motor dataflow",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_claimsdata",
+						"type": "DatasetReference"
+					},
+					"name": "claimdatasource"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_claimsdata_trans",
+						"type": "DatasetReference"
+					},
+					"name": "sinkclaimsdata"
+				}
+			],
+			"transformations": [
+				{
+					"name": "showcomprehensiveclaims"
+				},
+				{
+					"name": "Renamecolumns"
+				},
+				{
+					"name": "rankaccordingtoclaim"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Customer_ID as string,",
+				"          Policy_ID as short,",
+				"          Coverage_Type as string,",
+				"          Purchase_Date as date,",
+				"          Cover_Start_Date as date,",
+				"          Cover_End_Date as date,",
+				"          Period_of_Cover as short,",
+				"          LOB as string,",
+				"          Broker as string,",
+				"          Claim_ID as short,",
+				"          Claim_Status as string,",
+				"          Claim_Date as date,",
+				"          Claim_Closed_Date as date,",
+				"          Claim_Cost as double,",
+				"          Claim_Description as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> claimdatasource",
+				"claimdatasource filter(Coverage_Type=='Comprehensive' && Claim_Cost>500) ~> showcomprehensiveclaims",
+				"showcomprehensiveclaims select(mapColumn(",
+				"          each(match(true()),",
+				"               'motor_' + $$ = $$)",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> Renamecolumns",
+				"Renamecolumns rank(desc(motor_Claim_Cost, true),",
+				"     output(Higestclaim as long)) ~> rankaccordingtoclaim",
+				"rankaccordingtoclaim sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sinkclaimsdata"
+			]
+		}
+	}
+}

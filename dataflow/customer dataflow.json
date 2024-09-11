@@ -12,13 +12,27 @@
 					"name": "customerdata"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_customerdata_trans",
+						"type": "DatasetReference"
+					},
+					"name": "sinkcustomerdata"
+				}
+			],
 			"transformations": [
 				{
 					"name": "renamecolumns"
 				},
 				{
 					"name": "filterlesscreditscore"
+				},
+				{
+					"name": "removeunwantedcolumns"
+				},
+				{
+					"name": "rankbyrisk"
 				}
 			],
 			"scriptLines": [
@@ -48,7 +62,34 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> renamecolumns",
-				"renamecolumns filter(motor_Credit_Score>=99.9) ~> filterlesscreditscore"
+				"renamecolumns filter(motor_Credit_Score>=99.9) ~> filterlesscreditscore",
+				"filterlesscreditscore select(mapColumn(",
+				"          motor_Customer_ID,",
+				"          motor_Policy_ID,",
+				"          motor_Age,",
+				"          motor_Education,",
+				"          motor_Credit_Score,",
+				"          motor_Fraud_Risk_Score,",
+				"          motor_CCJs,",
+				"          motor_Claims_Count,",
+				"          motor_Licence,",
+				"          motor_Driver1_LicenceYears,",
+				"          motor_Driver1_LicenceRecord,",
+				"          motor_Driver1_Claims_Count",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> removeunwantedcolumns",
+				"removeunwantedcolumns rank(asc(motor_Fraud_Risk_Score, true),",
+				"     output(riskrankasc as long)) ~> rankbyrisk",
+				"rankbyrisk sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     partitionFileNames:['transcustomer.csv'],",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> sinkcustomerdata"
 			]
 		}
 	}

@@ -3,7 +3,7 @@
 	"properties": {
 		"activities": [
 			{
-				"name": "claims Data flow",
+				"name": "sales Data flow",
 				"type": "ExecuteDataFlow",
 				"dependsOn": [],
 				"policy": {

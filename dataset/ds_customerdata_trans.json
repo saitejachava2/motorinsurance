@@ -11,6 +11,7 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": "transcustomer.csv",
+				"folderPath": "customer",
 				"fileSystem": "motor"
 			},
 			"columnDelimiter": ",",

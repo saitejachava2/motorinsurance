@@ -11,7 +11,7 @@
 			"location": {
 				"type": "AzureBlobFSLocation",
 				"fileName": "Claims_Data.csv",
-				"folderPath": "insurance",
+				"folderPath": "insurance/Claims_Data",
 				"fileSystem": "raw"
 			},
 			"columnDelimiter": ",",

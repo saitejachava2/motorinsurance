@@ -10,7 +10,8 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
-				"fileName": "transclaim.csv",
+				"fileName": "transclaims.csv",
+				"folderPath": "claims",
 				"fileSystem": "motor"
 			},
 			"columnDelimiter": ",",

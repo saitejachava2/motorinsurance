@@ -1,0 +1,85 @@
+{
+	"name": "ds_customerdata",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_quotedata_adsl",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Customer_Data.csv",
+				"folderPath": "insurance",
+				"fileSystem": "raw"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "Customer_ID",
+				"type": "String"
+			},
+			{
+				"name": "Policy_ID",
+				"type": "String"
+			},
+			{
+				"name": "Age",
+				"type": "String"
+			},
+			{
+				"name": "Occupation",
+				"type": "String"
+			},
+			{
+				"name": "Education",
+				"type": "String"
+			},
+			{
+				"name": "Credit_Score",
+				"type": "String"
+			},
+			{
+				"name": "Fraud_Risk_Score",
+				"type": "String"
+			},
+			{
+				"name": "CCJs",
+				"type": "String"
+			},
+			{
+				"name": "DUI",
+				"type": "String"
+			},
+			{
+				"name": "Claims_Count",
+				"type": "String"
+			},
+			{
+				"name": "Traffic_Violations",
+				"type": "String"
+			},
+			{
+				"name": "Licence",
+				"type": "String"
+			},
+			{
+				"name": "Driver1_LicenceYears",
+				"type": "String"
+			},
+			{
+				"name": "Driver1_LicenceRecord",
+				"type": "String"
+			},
+			{
+				"name": "Driver1_Claims_Count",
+				"type": "String"
+			}
+		]
+	}
+}

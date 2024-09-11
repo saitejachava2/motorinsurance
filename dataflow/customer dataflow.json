@@ -3,11 +3,48 @@
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {
-			"sources": [],
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_customerdata",
+						"type": "DatasetReference"
+					},
+					"name": "customerdata"
+				}
+			],
 			"sinks": [],
-			"transformations": [],
+			"transformations": [
+				{
+					"name": "renamecolumns"
+				}
+			],
 			"scriptLines": [
-				""
+				"source(output(",
+				"          Customer_ID as string,",
+				"          Policy_ID as short,",
+				"          Age as short,",
+				"          Occupation as string,",
+				"          Education as string,",
+				"          Credit_Score as double,",
+				"          Fraud_Risk_Score as double,",
+				"          CCJs as short,",
+				"          DUI as boolean,",
+				"          Claims_Count as short,",
+				"          Traffic_Violations as boolean,",
+				"          Licence as string,",
+				"          Driver1_LicenceYears as short,",
+				"          Driver1_LicenceRecord as short,",
+				"          Driver1_Claims_Count as short",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> customerdata",
+				"customerdata select(mapColumn(",
+				"          each(match(true()),",
+				"               \"motor_\"+$$ = $$)",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> renamecolumns"
 			]
 		}
 	}

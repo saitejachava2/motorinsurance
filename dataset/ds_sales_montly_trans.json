@@ -1,0 +1,23 @@
+{
+	"name": "ds_sales_montly_trans",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_motordata_silver",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "monthlysales.csv",
+				"fileSystem": "motor"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": []
+	}
+}

@@ -1,5 +1,5 @@
 {
-	"name": "motor dataflow",
+	"name": "claims dataflow",
 	"properties": {
 		"type": "MappingDataFlow",
 		"typeProperties": {

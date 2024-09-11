@@ -16,6 +16,9 @@
 			"transformations": [
 				{
 					"name": "renamecolumns"
+				},
+				{
+					"name": "filterlesscreditscore"
 				}
 			],
 			"scriptLines": [
@@ -44,7 +47,8 @@
 				"               \"motor_\"+$$ = $$)",
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> renamecolumns"
+				"     skipDuplicateMapOutputs: true) ~> renamecolumns",
+				"renamecolumns filter(motor_Credit_Score>=99.9) ~> filterlesscreditscore"
 			]
 		}
 	}

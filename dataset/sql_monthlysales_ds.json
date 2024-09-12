@@ -1,0 +1,255 @@
+{
+	"name": "sql_monthlysales_ds",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_motor_database",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "motor_Customer_ID",
+				"type": "varchar"
+			},
+			{
+				"name": "motor_Purchase_Date",
+				"type": "date"
+			},
+			{
+				"name": "motor_Cover_Start_Date",
+				"type": "date"
+			},
+			{
+				"name": "motor_Cover_End_Date",
+				"type": "date"
+			},
+			{
+				"name": "motor_LOB",
+				"type": "varchar"
+			},
+			{
+				"name": "motor_Broker",
+				"type": "varchar"
+			},
+			{
+				"name": "motor_Income",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "motor_Marital_Status",
+				"type": "varchar"
+			},
+			{
+				"name": "motor_Premium",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "motor_Vehicle_Type",
+				"type": "varchar"
+			},
+			{
+				"name": "motor_Vehicle_Brand",
+				"type": "varchar"
+			},
+			{
+				"name": "motor_Vehicle_Age",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "motor_Vehicle_Value",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "motor_Vehicle_Use",
+				"type": "varchar"
+			},
+			{
+				"name": "motor_Vehicle_Mileage",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "motor_NCD",
+				"type": "bit"
+			},
+			{
+				"name": "motor_Driver1_Age",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "motor_Driver2_Age",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "motor_Driver1_LicenceYears",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "motor_Driver2_LicenceYears",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "motor_Driver1_LicenceRecord",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "motor_Driver2_LicenceRecord",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "motor_Driver1_Claims_Count",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "motor_Driver2_Claims_Count",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "motor_Location_Risk",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "motor_Daytime_Parking",
+				"type": "varchar"
+			},
+			{
+				"name": "motor_Overnight_Parking",
+				"type": "varchar"
+			},
+			{
+				"name": "motor_Telematics",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "motor_Credit_Score",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "motor_Fraud_Risk_Score",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "motor_CCJs",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "motor_Claims_Count",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "motor_Vehicle_Engine",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "motor_Vehicle_HP",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "motor_Saftey_ABS",
+				"type": "bit"
+			},
+			{
+				"name": "motor_Saftey_ESC",
+				"type": "bit"
+			},
+			{
+				"name": "motor_Saftey_TCS",
+				"type": "bit"
+			},
+			{
+				"name": "motor_Saftey_Rear_Camera",
+				"type": "bit"
+			},
+			{
+				"name": "motor_Antitheft_Immobilizer",
+				"type": "bit"
+			},
+			{
+				"name": "motor_Antitheft_Alarm",
+				"type": "bit"
+			},
+			{
+				"name": "motor_Antitheft_Remote_Locking",
+				"type": "bit"
+			},
+			{
+				"name": "motor_Antitheft_Steering_Wheel_Locks",
+				"type": "bit"
+			},
+			{
+				"name": "motor_Antitheft_GPS_Tracking",
+				"type": "bit"
+			},
+			{
+				"name": "motor_Fuel_Type",
+				"type": "varchar"
+			},
+			{
+				"name": "motor_Transmission",
+				"type": "varchar"
+			},
+			{
+				"name": "motor_Coverage_Type",
+				"type": "varchar"
+			},
+			{
+				"name": "motor_Area_Type",
+				"type": "varchar"
+			},
+			{
+				"name": "motor_Insurance_Type",
+				"type": "varchar"
+			},
+			{
+				"name": "motor_Payment_Type",
+				"type": "varchar"
+			},
+			{
+				"name": "motor_Education",
+				"type": "varchar"
+			},
+			{
+				"name": "motor_Licence",
+				"type": "varchar"
+			},
+			{
+				"name": "motor_Channel",
+				"type": "varchar"
+			},
+			{
+				"name": "motor_Policy_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "motor_type",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "motor_data",
+			"table": "monthlysales"
+		}
+	}
+}

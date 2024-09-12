@@ -5,6 +5,9 @@
 			"referenceName": "ls_quotedata_ablob",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "To be injested"
+		},
 		"annotations": [],
 		"type": "Json",
 		"typeProperties": {

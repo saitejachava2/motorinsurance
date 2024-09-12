@@ -5,6 +5,9 @@
 			"referenceName": "ls_quotedata_adsl",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "To be transformed"
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {

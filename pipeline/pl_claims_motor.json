@@ -88,6 +88,9 @@
 				]
 			}
 		],
+		"folder": {
+			"name": "Transform and copy data into data lakes and sql"
+		},
 		"annotations": []
 	}
 }

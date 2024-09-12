@@ -5,6 +5,9 @@
 			"referenceName": "ls_motordata_silver",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "Transformed"
+		},
 		"annotations": [],
 		"type": "DelimitedText",
 		"typeProperties": {

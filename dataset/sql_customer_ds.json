@@ -5,6 +5,9 @@
 			"referenceName": "ls_motor_database",
 			"type": "LinkedServiceReference"
 		},
+		"folder": {
+			"name": "Database"
+		},
 		"annotations": [],
 		"type": "AzureSqlTable",
 		"schema": [

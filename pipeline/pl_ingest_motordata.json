@@ -130,6 +130,9 @@
 				}
 			}
 		],
+		"folder": {
+			"name": "ingest motor data"
+		},
 		"annotations": []
 	}
 }

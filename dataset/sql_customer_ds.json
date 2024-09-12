@@ -1,0 +1,79 @@
+{
+	"name": "sql_customer_ds",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_motor_database",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "motor_Customer_ID",
+				"type": "varchar"
+			},
+			{
+				"name": "motor_Policy_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "motor_Age",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "motor_Education",
+				"type": "varchar"
+			},
+			{
+				"name": "motor_Credit_Score",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "motor_Fraud_Risk_Score",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "motor_CCJs",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "motor_Claims_Count",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "motor_Licence",
+				"type": "varchar"
+			},
+			{
+				"name": "motor_Driver1_LicenceYears",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "motor_Driver1_LicenceRecord",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "motor_Driver1_Claims_Count",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "riskrankasc",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "motor_data",
+			"table": "customers"
+		}
+	}
+}

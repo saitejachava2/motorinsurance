@@ -1,0 +1,86 @@
+{
+	"name": "sql_claims_ds",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "ls_motor_database",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "motor_Customer_ID",
+				"type": "varchar"
+			},
+			{
+				"name": "motor_Policy_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "motor_Coverage_Type",
+				"type": "varchar"
+			},
+			{
+				"name": "motor_Purchase_Date",
+				"type": "date"
+			},
+			{
+				"name": "motor_Cover_Start_Date",
+				"type": "date"
+			},
+			{
+				"name": "motor_Cover_End_Date",
+				"type": "date"
+			},
+			{
+				"name": "motor_Period_of_Cover",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "motor_LOB",
+				"type": "varchar"
+			},
+			{
+				"name": "motor_Broker",
+				"type": "varchar"
+			},
+			{
+				"name": "motor_Claim_ID",
+				"type": "int",
+				"precision": 10
+			},
+			{
+				"name": "motor_Claim_Status",
+				"type": "varchar"
+			},
+			{
+				"name": "motor_Claim_Date",
+				"type": "date"
+			},
+			{
+				"name": "motor_Claim_Closed_Date",
+				"type": "date"
+			},
+			{
+				"name": "motor_Claim_Cost",
+				"type": "float",
+				"precision": 15
+			},
+			{
+				"name": "motor_Claim_Description",
+				"type": "varchar"
+			},
+			{
+				"name": "Higestclaim",
+				"type": "int",
+				"precision": 10
+			}
+		],
+		"typeProperties": {
+			"schema": "motor_data",
+			"table": "claims"
+		}
+	}
+}

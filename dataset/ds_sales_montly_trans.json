@@ -10,6 +10,7 @@
 		"typeProperties": {
 			"location": {
 				"type": "AzureBlobFSLocation",
+				"fileName": "monthlysales.csv",
 				"folderPath": "sales",
 				"fileSystem": "motor"
 			},

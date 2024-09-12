@@ -184,18 +184,22 @@
 				"     disjoint: false) ~> splitbasedonpayment@(Monthly, Yearly)",
 				"splitbasedonpayment@Monthly sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     partitionFileNames:['monthlyquote.csv'],",
 				"     umask: 0022,",
 				"     preCommands: [],",
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sinkmonthlyquotes",
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> sinkmonthlyquotes",
 				"splitbasedonpayment@Yearly sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
+				"     partitionFileNames:['yearlyquote.csv'],",
 				"     umask: 0022,",
 				"     preCommands: [],",
 				"     postCommands: [],",
 				"     skipDuplicateMapInputs: true,",
-				"     skipDuplicateMapOutputs: true) ~> sinkyearlyquotedata"
+				"     skipDuplicateMapOutputs: true,",
+				"     partitionBy('hash', 1)) ~> sinkyearlyquotedata"
 			]
 		}
 	}

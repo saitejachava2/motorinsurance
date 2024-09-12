@@ -12,13 +12,40 @@
 					"name": "quotedata"
 				}
 			],
-			"sinks": [],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "ds_monthlyquote_trans",
+						"type": "DatasetReference"
+					},
+					"name": "sinkmonthlyquotes"
+				},
+				{
+					"dataset": {
+						"referenceName": "ds_yearlyquote_trans",
+						"type": "DatasetReference"
+					},
+					"name": "sinkyearlyquotedata"
+				}
+			],
 			"transformations": [
 				{
 					"name": "renamecloumns"
 				},
 				{
 					"name": "addtypeandtransmission"
+				},
+				{
+					"name": "removeunwantedcolumns"
+				},
+				{
+					"name": "deleteoldvechicles"
+				},
+				{
+					"name": "filtercreditscore"
+				},
+				{
+					"name": "splitbasedonpayment"
 				}
 			],
 			"scriptLines": [
@@ -92,7 +119,83 @@
 				"     ),",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true) ~> renamecloumns",
-				"renamecloumns derive(motor_type = motor_Fuel_Type+\" \"+motor_Transmission) ~> addtypeandtransmission"
+				"renamecloumns derive(motor_type = motor_Fuel_Type+\" \"+motor_Transmission) ~> addtypeandtransmission",
+				"addtypeandtransmission select(mapColumn(",
+				"          motor_Customer_ID,",
+				"          motor_Purchase_Date,",
+				"          motor_Cover_Start_Date,",
+				"          motor_Cover_End_Date,",
+				"          motor_LOB,",
+				"          motor_Broker,",
+				"          motor_Age,",
+				"          motor_Income,",
+				"          motor_Marital_Status,",
+				"          motor_Premium,",
+				"          motor_Vehicle_Type,",
+				"          motor_Vehicle_Brand,",
+				"          motor_Vehicle_Age,",
+				"          motor_Vehicle_Value,",
+				"          motor_Vehicle_Use,",
+				"          motor_Vehicle_Mileage,",
+				"          motor_NCD,",
+				"          motor_Number_of_Drivers,",
+				"          motor_Driver1_Age,",
+				"          motor_Driver2_Age,",
+				"          motor_Driver1_LicenceYears,",
+				"          motor_Driver2_LicenceYears,",
+				"          motor_Driver1_LicenceRecord,",
+				"          motor_Driver2_LicenceRecord,",
+				"          motor_Driver1_Claims_Count,",
+				"          motor_Driver2_Claims_Count,",
+				"          motor_Location_Risk,",
+				"          motor_Daytime_Parking,",
+				"          motor_Overnight_Parking,",
+				"          motor_Telematics,",
+				"          motor_Credit_Score,",
+				"          motor_Fraud_Risk_Score,",
+				"          motor_CCJs,",
+				"          motor_Sale_Flag,",
+				"          motor_Claims_Count,",
+				"          motor_Vehicle_Engine,",
+				"          motor_Vehicle_HP,",
+				"          motor_Saftey_ABS,",
+				"          motor_Saftey_ESC,",
+				"          motor_Saftey_TCS,",
+				"          motor_Saftey_Rear_Camera,",
+				"          motor_Antitheft_Immobilizer,",
+				"          motor_Antitheft_Alarm,",
+				"          motor_Antitheft_Remote_Locking,",
+				"          motor_Antitheft_Steering_Wheel_Locks,",
+				"          motor_Antitheft_GPS_Tracking,",
+				"          motor_Coverage_Type,",
+				"          motor_Area_Type,",
+				"          motor_Insurance_Type,",
+				"          motor_Payment_Type,",
+				"          motor_Education,",
+				"          motor_Licence,",
+				"          motor_Channel,",
+				"          motor_type",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> removeunwantedcolumns",
+				"removeunwantedcolumns alterRow(deleteIf(motor_Vehicle_Age>=15)) ~> deleteoldvechicles",
+				"deleteoldvechicles filter(motor_Credit_Score>=100) ~> filtercreditscore",
+				"filtercreditscore split(motor_Payment_Type==\"Monthly\",",
+				"     disjoint: false) ~> splitbasedonpayment@(Monthly, Yearly)",
+				"splitbasedonpayment@Monthly sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sinkmonthlyquotes",
+				"splitbasedonpayment@Yearly sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     umask: 0022,",
+				"     preCommands: [],",
+				"     postCommands: [],",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sinkyearlyquotedata"
 			]
 		}
 	}

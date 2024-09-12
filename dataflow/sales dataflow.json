@@ -42,7 +42,7 @@
 					"name": "alterRow1"
 				},
 				{
-					"name": "filterpurchasedate"
+					"name": "filtercreditscore"
 				},
 				{
 					"name": "splitaccordingtopremium"
@@ -179,8 +179,8 @@
 				"     skipDuplicateMapOutputs: true) ~> deleteunwantedcolumns",
 				"deleteunwantedcolumns derive(motor_type = motor_Fuel_Type+\" \"+motor_Transmission) ~> addtypeandtransmissioncolumns",
 				"addtypeandtransmissioncolumns alterRow(deleteIf(motor_Vehicle_Age>=15)) ~> alterRow1",
-				"alterRow1 filter(motor_Credit_Score>=100) ~> filterpurchasedate",
-				"filterpurchasedate split(motor_Payment_Type==\"Monthly\",",
+				"alterRow1 filter(motor_Credit_Score>=100) ~> filtercreditscore",
+				"filtercreditscore split(motor_Payment_Type==\"Monthly\",",
 				"     disjoint: false) ~> splitaccordingtopremium@(Monthly, Annually)",
 				"splitaccordingtopremium@Monthly sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",

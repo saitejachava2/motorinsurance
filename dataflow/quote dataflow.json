@@ -1,0 +1,99 @@
+{
+	"name": "quote dataflow",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "ds_quotedata",
+						"type": "DatasetReference"
+					},
+					"name": "quotedata"
+				}
+			],
+			"sinks": [],
+			"transformations": [
+				{
+					"name": "renamecloumns"
+				},
+				{
+					"name": "addtypeandtransmission"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          Customer_ID as string,",
+				"          Purchase_Date as date,",
+				"          Cover_Start_Date as date,",
+				"          Cover_End_Date as date,",
+				"          Period_of_Cover as short,",
+				"          LOB as string,",
+				"          Broker as string,",
+				"          Age as short,",
+				"          Occupation as string,",
+				"          Income as integer,",
+				"          Marital_Status as string,",
+				"          Premium as double,",
+				"          Vehicle_Type as string,",
+				"          Vehicle_Brand as string,",
+				"          Vehicle_Age as short,",
+				"          Vehicle_Value as double,",
+				"          Vehicle_Use as string,",
+				"          Vehicle_Mileage as double,",
+				"          NCD as boolean,",
+				"          Number_of_Drivers as short,",
+				"          Driver1_Age as short,",
+				"          Driver2_Age as short,",
+				"          Driver1_LicenceYears as short,",
+				"          Driver2_LicenceYears as short,",
+				"          Driver1_LicenceRecord as short,",
+				"          Driver2_LicenceRecord as short,",
+				"          Driver1_Claims_Count as short,",
+				"          Driver2_Claims_Count as short,",
+				"          Location_Risk as double,",
+				"          Daytime_Parking as string,",
+				"          Overnight_Parking as string,",
+				"          Telematics as double,",
+				"          Credit_Score as double,",
+				"          Fraud_Risk_Score as double,",
+				"          CCJs as short,",
+				"          Sale_Flag as boolean,",
+				"          Claims_Count as short,",
+				"          Vehicle_Engine as double,",
+				"          Vehicle_HP as double,",
+				"          Saftey_ABS as boolean,",
+				"          Saftey_ESC as boolean,",
+				"          Saftey_TCS as boolean,",
+				"          Saftey_Rear_Camera as boolean,",
+				"          Antitheft_Immobilizer as boolean,",
+				"          Antitheft_Alarm as boolean,",
+				"          Antitheft_Remote_Locking as boolean,",
+				"          Antitheft_Steering_Wheel_Locks as boolean,",
+				"          Antitheft_GPS_Tracking as boolean,",
+				"          Fuel_Type as string,",
+				"          Transmission as string,",
+				"          Coverage_Type as string,",
+				"          Area_Type as string,",
+				"          Insurance_Type as string,",
+				"          Payment_Type as string,",
+				"          Traffic_Violations as boolean,",
+				"          DUI as boolean,",
+				"          Education as string,",
+				"          Licence as string,",
+				"          Channel as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> quotedata",
+				"quotedata select(mapColumn(",
+				"          each(match(true()),",
+				"               \"motor_\"+$$ = $$)",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> renamecloumns",
+				"renamecloumns derive(motor_type = motor_Fuel_Type+\" \"+motor_Transmission) ~> addtypeandtransmission"
+			]
+		}
+	}
+}
